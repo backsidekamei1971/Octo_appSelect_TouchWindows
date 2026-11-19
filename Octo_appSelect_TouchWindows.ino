@@ -27,6 +27,26 @@
 
 int j=0;
 //int xxx=0;
+int k=0;
+int posx=50;
+int posy=50;
+int dx=10;
+int dy=10;
+int m1=0;
+int m2=0;
+int m3=0;
+int m4=0;
+int row1=1;
+int row2=1;
+int row3=1;
+int n1=0;
+int n2=0;
+int n3=0;
+int n4=0;
+int p1=0;
+int p2=0;
+int p3=0;
+int p4=0;
 
 
 
@@ -63,13 +83,13 @@ void setup()
 }
 
 int i = 0;
-int k = 0;
+//int k = 0;
 int missile = 0;
 int app_select=0;
-int posx=50;
-int posy=50;
-int dx=5;
-int dy=5;
+//int posx=50;
+//int posy=50;
+//int dx=5;
+//int dy=5;
 int slideYValue=80;
 
 // the loop function runs over and over again until power down or reset
@@ -485,7 +505,8 @@ void loop()
     posy=50;
 
      app_select=2;
-    Waveshield.fillScreen(BLACK);
+    //Waveshield.fillScreen(BLACK);
+    Waveshield.fillRect(80,80,350,400,BLACK);
 
     Waveshield.fillRect(0, 0, 80, 80, YELLOW); 
     Waveshield.setRotation(0);
@@ -500,7 +521,7 @@ void loop()
     Waveshield.fillRect(240, 0, 80, 80, CYAN);
     Waveshield.fillRect(0, 240, 80, 80, RED);
     Waveshield.fillRect(0, 320, 80, 80, SILVER);
-		Waveshield.fillRect(0, 400, 80, 80, ORANGE);
+    Waveshield.fillRect(0, 400, 80, 80, ORANGE);
 
     Waveshield.fillRect(90, 370, 20, 80, RED);
     Waveshield.fillRect(90, 280, 20, 80, MAGENTA);
@@ -517,15 +538,17 @@ void loop()
     Waveshield.fillRect(150, 190, 20, 80, YELLOW);
     Waveshield.fillRect(150, 100, 20, 80, GREEN);
 
-    //Waveshield.fillCircle(190, 230, 9, WHITE);
-    k=0;
-    }
-    if (app_select==2){
+    Waveshield.drawLine(85, 90, 85, 460, WHITE);   //upper Yoko Line
+    Waveshield.drawLine(85, 90, 310, 90, WHITE);   //right Tate Line
+    Waveshield.drawLine(85, 460, 310, 460, WHITE);   //left Tate Line
+    Waveshield.drawLine(310, 90, 310, 460, WHITE);   //lower Yoko Line
 
-  Waveshield.drawLine(170, 100, 170, 450, WHITE);   //upper Yoko Line
-  Waveshield.drawLine(170, 100, 310, 100, WHITE);   //right Tate Line
-  Waveshield.drawLine(170, 450, 310, 450, WHITE);   //left Tate Line
-  Waveshield.drawLine(310, 100, 310, 450, WHITE);   //lower Yoko Line
+
+    k=0;
+
+    }
+   
+    if (app_select==2){
 
     if (p.x <= 380 && p.y <= 470 && p.x > 70 && p.y >= 290){
     k=k+24;
@@ -541,26 +564,158 @@ void loop()
     }
 
     Waveshield.fillRect(280, 330+k, 20, 80, WHITE);
+    Waveshield.fillRect(130+posy, 105+posx, 10, 10, WHITE);
     delay(150);
     Waveshield.fillRect(280, 330+k, 20, 80, BLACK);
+    Waveshield.fillRect(130+posy, 105+posx, 10, 10, BLACK);
 
-  Waveshield.fillRect(130+posy, 105+posx, 10, 10, WHITE);
-  delay(150);
-  Waveshield.fillRect(130+posy, 105+posx, 10, 10, BLACK);
-  
-  posx=posx+dx;
-  posy=posy+dy;
+     posx=posx+dx;
+     posy=posy+dy;
 
   if (posx>=330 or posx<=0){  //Yoko limit
     dx=-dx;
   }
 
-  if (posy>=170 or posy<=40){  //Tate limit
+  if (row1==1){
+    if (posy>=170 or posy<=40){  //Tate limit
     dy=-dy;
+  }
+  }
+  if (row1==0 and row2!=0){
+    if (posy>=170 or posy<=20){  //Tate limit
+    dy=-dy;
+  }
+  }
+  if (row1==0 and row2==0){
+    if (posy>=170 or posy<=-10){  //Tate limit
+    dy=-dy;
+   }
+   }
+  
+  //Waveshield.setRotation(1);
+  //Waveshield.setTextColor(WHITE);
+  //Waveshield.setCursor(200,200);
+  //Waveshield.print(posx);
+  //Waveshield.setCursor(280,200);
+  //Waveshield.print(posy);
+  //delay(100);
+  //Waveshield.setTextColor(BLACK);
+  //Waveshield.setCursor(200,200);
+  //Waveshield.print(posx);
+  //Waveshield.setCursor(280,200);
+  //Waveshield.print(posy);
+
+  Waveshield.setRotation(0);
+
+  if (350>= posx and  270<=posx and posy<=40 and row3!=0){  //１列目
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(150, 370, 20, 80, BLACK);
+    m1=1;
+  }
+  if (260>= posx and  180<=posx and posy<=40 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(150, 280, 20, 80, BLACK);
+    m2=1;
+  }
+    if (170>= posx and  90<=posx and posy<=40 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(150, 190, 20, 80, BLACK);
+    m3=1;
+  }
+    if (80>= posx and  0<=posx and posy<=40 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(150, 100, 20, 80, BLACK);
+    m4=1;
+  }
+   
+    if (m1==1 and m2==1 and m3==1 and m4==1){
+      row1=0;
+    }
+
+    if (350>= posx and  270<=posx and posy<=20 and row3!=0){  //ここから２列目
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(120, 370, 20, 80, BLACK);
+    n1=1;
+  }
+    if (260>= posx and  180<=posx and posy<=20 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(120, 280, 20, 80, BLACK);
+    n2=1;
+  }
+    if (170>= posx and 90<=posx and posy<=20 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(120, 190, 20, 80, BLACK);
+    n3=1;
+  }
+    if (80>= posx and  0<=posx and posy<=20 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(120, 100, 20, 80, BLACK);
+    n4=1;
+  }
+    if (n1==1 and n2==1 and n3==1 and n4==1){
+      row2=0;
+    }
+
+    if (350>= posx and  270<=posx and posy<=-10 and row3!=0){  //ここから３列目
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(90, 370, 20, 80, BLACK);
+    p1=1;
+  }
+    if (260>= posx and  180<=posx and posy<=-10 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(90, 280, 20, 80, BLACK);
+    p2=1;
+  }
+    if (170>= posx and  90<=posx and posy<=-10 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(90, 190, 20, 80, BLACK);
+    p3=1;
+  }
+    if (80>= posx and  0<=posx and posy<=-10 and row3!=0){
+    //Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(90, 100, 20, 80, BLACK);
+    p4=1;
+  }
+  if (p1==1 and p2==1 and p3==1 and p4==1){
+    row3=0;
+    
+    Waveshield.fillRect(90, 370, 20, 80, RED);
+    Waveshield.fillRect(90, 280, 20, 80, MAGENTA);
+    Waveshield.fillRect(90, 190, 20, 80, YELLOW);
+    Waveshield.fillRect(90, 100, 20, 80, GREEN);
+
+    Waveshield.fillRect(120, 370, 20, 80, RED);
+    Waveshield.fillRect(120, 280, 20, 80, MAGENTA);
+    Waveshield.fillRect(120, 190, 20, 80, YELLOW);
+    Waveshield.fillRect(120, 100, 20, 80, GREEN);
+
+    Waveshield.fillRect(150, 370, 20, 80, RED);
+    Waveshield.fillRect(150, 280, 20, 80, MAGENTA);
+    Waveshield.fillRect(150, 190, 20, 80, YELLOW);
+    Waveshield.fillRect(150, 100, 20, 80, GREEN);
+    m1=0;
+    m2=0;
+    m3=0;
+    m4=0;
+    n1=0;
+    n2=0;
+    n3=0;
+    n4=0;
+    p1=0;
+    p2=0;
+    p3=0;
+    p4=0;
+    posx=50;
+    posy=50;
+    row1=1;
+    row2=1;
+    row3=1;
+
   }
 
 
-    }
+  }
+
     
 
   if (p.x <= 320 && p.y <= 80 && p.x > 240 && p.y >= 0 ){  //touch calculator gamen
@@ -957,7 +1112,7 @@ void loop()
 
   }
   }
-	  if (p.x <= 80 && p.y <= 480 && p.x > 0 && p.y >= 400 && app_select !=5){  //Logikara
+	  if (p.x <= 80 && p.y <= 480 && p.x > 0 && p.y >= 400 && app_select !=5){  //Touch Draw
   Waveshield.fillScreen(BLACK);
   app_select=8;
   Waveshield.setRotation(0);
